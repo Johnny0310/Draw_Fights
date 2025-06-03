@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3a7tavlr6v0y"]
+
+[ext_resource type="Script" uid="uid://bvp8mc66uk8q1" path="res://Scripts/ataquehitbox.gd" id="1_liioi"]
+[ext_resource type="Texture2D" uid="uid://bqmoj545anbbt" path="res://Sprites/enemy15x15.png" id="1_xi7wo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
+size = Vector2(14, 14)
+
+[node name="ataque" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_liioi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fc0e3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xi7wo")

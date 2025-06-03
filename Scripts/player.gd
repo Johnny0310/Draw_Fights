@@ -6,13 +6,12 @@ var tiempo_transcurrido := 0.0
 var distancia_minima := 15
 var balas := []
 var ammo = 100
-
+var tipoDeBala = "res://Scenes/ataque.tscn"
 
 
 # Define el origen del área válida (puedes mover esto donde desees)
 var area_origen := Vector2(150, 500)
 var area_tamano := Vector2(1000, 200)
-
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -29,6 +28,7 @@ func _input(event):
 
 func _process(delta):
 	var area2d = get_node("EnemyHitbox/Area2D")
+	
 	if clic_presionado and ammo != 0:
 		tiempo_transcurrido += delta
 		if tiempo_transcurrido >= intervalo:
@@ -36,7 +36,7 @@ func _process(delta):
 			var mouse_pos = get_viewport().get_mouse_position()
 
 			if esta_en_area_valida(mouse_pos) and not hay_escena_cercana(mouse_pos):
-				var bala = load("res://Scenes/player.tscn").instantiate()
+				var bala = load(tipoDeBala).instantiate()
 				bala.position = mouse_pos
 				add_child(bala)
 				ammo -= 1
