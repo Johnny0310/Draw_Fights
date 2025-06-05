@@ -1,6 +1,10 @@
 extends RigidBody2D
 
-var tipo = 1  # Cambia a 2 si es defensa
+var tipo = 1  # 1 = Ataque | 2 = Defensa | 3 = Tinta Roca 
+var player = true
+
+@onready var main_node := get_node("/root/game")  # Accedemos al nodo raíz 'game'
+
 func _ready():
 	# Asegúrate de que el nodo tenga activada la señal de contacto
 	contact_monitor = true
@@ -12,7 +16,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		if collider is RigidBody2D and collider.has_method("get_tipo"):
 			if collider.get_tipo() != tipo:
 				queue_free()
-
+	
 
 
 func get_tipo():

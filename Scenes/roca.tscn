@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://0v5g6eutd511"]
+
+[ext_resource type="Script" uid="uid://caighxb3qpur0" path="res://Scripts/roca.gd" id="1_r0tlj"]
+[ext_resource type="Texture2D" uid="uid://cbxwg6swhsran" path="res://Sprites/roca15x15.png" id="2_r0tlj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
+size = Vector2(14, 14)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+collision_mask = 4
+script = ExtResource("1_r0tlj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_r0tlj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fc0e3")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_fc0e3")

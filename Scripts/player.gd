@@ -1,19 +1,20 @@
 extends Node2D
 
 var clic_presionado := false
-var intervalo := 0.01
+var intervalo := 0.001
 var tiempo_transcurrido := 0.0
 var distancia_minima := 15
 var balas := []
-var ammo = 100
+var ammo = 1000
 var tipoDeBala = "res://Scenes/ataque.tscn"
 
 
 # Define el origen del área válida (puedes mover esto donde desees)
-var area_origen := Vector2(150, 500)
-var area_tamano := Vector2(1000, 200)
+var area_origen := Vector2(200, 900)
+var area_tamano := Vector2(500, 200)
+var balaposition = Vector2()
 
-func _input(event):
+func _input2(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
@@ -24,7 +25,29 @@ func _input(event):
 				clic_presionado = false
 				for bala in balas:
 					if bala and bala.is_inside_tree():
-						bala.gravity_scale = -1
+						if bala != StaticBody2D:
+							if bala.tipo != 3:
+								bala.gravity_scale = -1
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			print("🟢 Dedo PRESIONADO en: ", event.position, " | índice: ", event.index)
+			clic_presionado = true
+			balaposition = Vector2(event.position)
+		else:
+			print("🔴 Dedo LEVANTADO en: ", event.position, " | índice: ", event.index)
+			print("Botón izquierdo soltado")
+			clic_presionado = false
+			for bala in balas:
+				if bala and bala.is_inside_tree():
+					if bala != StaticBody2D:
+						if bala.tipo != 3:
+							bala.gravity_scale = -1
+			balaposition = Vector2()
+	elif event is InputEventScreenDrag:
+		print("🟡 Arrastrando dedo en: ", event.position, " | índice: ", event.index)
+		balaposition = Vector2(event.position)
 
 func _process(delta):
 	var area2d = get_node("EnemyHitbox/Area2D")
@@ -37,7 +60,11 @@ func _process(delta):
 
 			if esta_en_area_valida(mouse_pos) and not hay_escena_cercana(mouse_pos):
 				var bala = load(tipoDeBala).instantiate()
+				bala.player = true
+				bala.set_collision_layer(2)  # Solo capa 2
+				bala.set_collision_mask(1)  # Solo mask 2
 				bala.position = mouse_pos
+				bala.position = balaposition
 				add_child(bala)
 				ammo -= 1
 				if area2d.has_method("actualizar_texto"):

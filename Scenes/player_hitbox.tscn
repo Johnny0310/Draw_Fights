@@ -12,18 +12,18 @@ size = Vector2(14.9, 14.8)
 script = ExtResource("1_cl03s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(640, 650)
-scale = Vector2(90, 1)
+position = Vector2(360, 1200)
+scale = Vector2(50, 0.555)
 shape = SubResource("RectangleShape2D_3dryh")
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-position = Vector2(640, 650)
-scale = Vector2(90, 1)
+position = Vector2(360, 1200)
+scale = Vector2(50, 0.555)
 texture = ExtResource("2_fg1uv")
 
 [node name="Impactos" type="TextEdit" parent="."]
-offset_left = 13.0
-offset_top = 684.0
-offset_right = 211.0
-offset_bottom = 710.0
+offset_left = 3.0
+offset_top = 1224.0
+offset_right = 201.0
+offset_bottom = 1250.0
 text = "contador"

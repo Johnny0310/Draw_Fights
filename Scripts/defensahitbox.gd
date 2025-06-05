@@ -1,6 +1,8 @@
 extends RigidBody2D
 
-var tipo = 2  # Cambia a 2 si es defensa
+var tipo = 2  # 1 = Ataque | 2 = Defensa | 3 = Tinta Roca
+var player = true
+
 func _ready():
 	# Asegúrate de que el nodo tenga activada la señal de contacto
 	contact_monitor = true

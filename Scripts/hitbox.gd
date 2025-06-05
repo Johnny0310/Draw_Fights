@@ -1,4 +1,5 @@
 extends Area2D
+signal impactos_actualizados(nuevos_impactos: int)
 
 var impactos: int = 0
 
@@ -28,6 +29,7 @@ func _ready() -> void:
 func _on_body_entered(body: Node) -> void:
 	if body is RigidBody2D:
 		impactos += 1
+		emit_signal("impactos_actualizados", impactos)
 		print("Impactado por:", body.name, "- Total impactos:", impactos)
 		if body.is_inside_tree():
 			body.queue_free()
@@ -51,10 +53,16 @@ func invocar_aleatorio() -> void:
 	for i in range(limite):
 		if tipo == 1:
 			bala = load("res://Scenes/ataque.tscn").instantiate()
+			bala.player = false
+			bala.set_collision_layer(1)  # Solo capa 1
+			bala.set_collision_mask(1)  # Solo mask 1
 		elif tipo == 2:
 			bala = load("res://Scenes/defensa.tscn").instantiate()
+			bala.player = false
+			bala.set_collision_layer(1)  # Solo capa 1
+			bala.set_collision_mask(1)  # Solo mask 1
 		# Asignar posición aleatoria en X entre 100 y 1180, Y fijo en 180
-		var posicion_aleatoria = Vector2(randf_range(200.0, 1080.0), 195.0)
+		var posicion_aleatoria = Vector2(randf_range(210.0, 850.0), 195.0)
 		bala.position = posicion_aleatoria
 		bala.gravity_scale = 1
 		var contenedor = get_node(nodo_contenedor)
