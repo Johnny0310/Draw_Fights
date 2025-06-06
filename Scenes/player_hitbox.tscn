@@ -1,29 +1,67 @@
-[gd_scene load_steps=4 format=3 uid="uid://cs8w064citmys"]
+[gd_scene load_steps=9 format=3 uid="uid://cs8w064citmys"]
 
 [ext_resource type="Script" uid="uid://c446ka7n1iwrf" path="res://Scripts/hitboxPlayer.gd" id="1_cl03s"]
 [ext_resource type="Texture2D" uid="uid://bqmoj545anbbt" path="res://Sprites/enemy15x15.png" id="2_fg1uv"]
+[ext_resource type="Script" uid="uid://573lkdcp488x" path="res://Scripts/sistemaDeVida.gd" id="3_fg1uv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dryh"]
 size = Vector2(14.9, 14.8)
 
-[node name="PlayerHitbox" type="Node2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fe233"]
+bg_color = Color(0.73054, 0.146959, 0.224508, 1)
 
-[node name="Area2D" type="Area2D" parent="."]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mrosl"]
+bg_color = Color(0.866999, 0.383045, 0.571362, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3qt51"]
+bg_color = Color(0.337255, 0.466667, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhgjh"]
+bg_color = Color(0.211765, 0.388235, 0.623529, 1)
+
+[node name="PlayerHitBox" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("barra_vida", "barra_tinta")]
 script = ExtResource("1_cl03s")
+barra_vida = NodePath("../Vida")
+barra_tinta = NodePath("../Tinta")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(360, 1200)
+position = Vector2(360, 880)
 scale = Vector2(50, 0.555)
 shape = SubResource("RectangleShape2D_3dryh")
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-position = Vector2(360, 1200)
+position = Vector2(360, 880)
 scale = Vector2(50, 0.555)
 texture = ExtResource("2_fg1uv")
 
 [node name="Impactos" type="TextEdit" parent="."]
 offset_left = 3.0
-offset_top = 1224.0
+offset_top = 1230.0
 offset_right = 201.0
-offset_bottom = 1250.0
+offset_bottom = 1256.0
 text = "contador"
+
+[node name="Vida" type="ProgressBar" parent="."]
+offset_left = 250.0
+offset_top = 1230.0
+offset_right = 386.0
+offset_bottom = 1257.0
+theme_override_styles/background = SubResource("StyleBoxFlat_fe233")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mrosl")
+max_value = 1.0
+value = 0.5
+fill_mode = 1
+script = ExtResource("3_fg1uv")
+
+[node name="Tinta" type="ProgressBar" parent="."]
+offset_left = 400.0
+offset_top = 1230.0
+offset_right = 536.0
+offset_bottom = 1257.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3qt51")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hhgjh")
+max_value = 1.0
+value = 0.5
+script = ExtResource("3_fg1uv")

@@ -2,11 +2,12 @@ extends RigidBody2D
 
 var tipo = 2  # 1 = Ataque | 2 = Defensa | 3 = Tinta Roca
 var player = true
+var choque_roca = false
 
 func _ready():
 	# Asegúrate de que el nodo tenga activada la señal de contacto
 	contact_monitor = true
-	max_contacts_reported = 1000  # Puedes ajustar este valor según tus necesidades
+	max_contacts_reported = 10000  # Puedes ajustar este valor según tus necesidades
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	for i in range(state.get_contact_count()):
@@ -19,3 +20,6 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 func get_tipo():
 	return tipo
+
+func get_choque_roca():
+	return choque_roca

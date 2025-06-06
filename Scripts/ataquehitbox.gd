@@ -2,6 +2,7 @@ extends RigidBody2D
 
 var tipo = 1  # 1 = Ataque | 2 = Defensa | 3 = Tinta Roca 
 var player = true
+var choque_roca = false
 
 @onready var main_node := get_node("/root/game")  # Accedemos al nodo raíz 'game'
 
@@ -21,3 +22,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 func get_tipo():
 	return tipo
+	
+	
+func get_choque_roca():
+	return choque_roca

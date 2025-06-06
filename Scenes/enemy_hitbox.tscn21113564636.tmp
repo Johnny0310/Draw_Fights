@@ -27,7 +27,6 @@ bg_color = Color(0.211765, 0.388235, 0.623529, 1)
 [node name="EnemyHitbox" type="Node2D"]
 
 [node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("barra_vida", "barra_ulti")]
-collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_ijw0m")
 barra_vida = NodePath("../Vida")

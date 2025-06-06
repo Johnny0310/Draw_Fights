@@ -48,4 +48,4 @@ position = Vector2(58, 945)
 scale = Vector2(3.2, 3.06667)
 texture = ExtResource("3_3dryh")
 
-[node name="EnemyHitbox2" parent="." instance=ExtResource("6_i6g32")]
+[node name="PlayerHitBox" parent="." instance=ExtResource("6_i6g32")]
